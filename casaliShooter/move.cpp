@@ -36,8 +36,8 @@ using namespace nsAudio;
 
 /** @brief Adding scores + names into score.txt
 *
-*@param[in] playerLifeString :
-*@param[in] nameStr :
+*@param[in] playerLifeString : Points of the player in string
+*@param[in] nameStr : Name of the player
 *@returns void
 *
 */
@@ -51,8 +51,8 @@ void addScore(string &playerLifeString, string &nameStr){
 
 /** @brief If a key is pressed, the position of the mug is retrieved.  Add or remove 5 to the X position with Q and D ( move the mug )
 *
-*@param[in] window :
-*@param[in] mug :
+*@param[in] window : display the sprite of the mug 
+*@param[in] mug : move the sprite of the mug
 *@returns void
 *
 */
@@ -76,9 +76,9 @@ void keyboard(MinGL &window, Sprite &mug, vector<unsigned> vecKey)
 
 /** @brief Adds x and y to the coordinates of the sprite passed as parameters
 *
-*@param[in] position :
-*@param x :
-*@param y :
+*@param[in] position : Position of the sprite 
+*@param[in] x : Set de X position of the sprite 
+*@param[in] y : Set de Y position of the sprite 
 *@returns void
 *
 */
@@ -124,9 +124,9 @@ void moveOpen(enemyStruct & open, string &playerLifeString, string &nameStr){
 
 /** @brief Move JPPS,IPPS,KPPS
 *
-*@param[in] vecSprite:
-*@param[in] playerLifeString :
-*@param[in] nameStr :
+*@param[in] vecSprite: Vector of ennemies 
+*@param[in] playerLifeString : Points of the player in string
+*@param[in] nameStr :Name of the player
 *@returns void
 *
 */
