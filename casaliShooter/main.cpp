@@ -1,4 +1,4 @@
-**
+/**
 * @file main.cpp
 * @brief CasaliShooter game 
 * @author Gonzales, Djerian, Leydier, Volpei, Dugourd
