@@ -66,7 +66,8 @@ bool isTouching (const Vec2D firstCorner, const Vec2D secondCorner, const Vec2D 
 *@param[in] misPos : Position of the missile
 *@param[in] vecSprite : Vector of enemies
 *@returns bool If the player touch an enemy
-
+*
+*/
 bool colision(const Vec2D misPos, enemyStruct &vecSprite){
     for (size_t i = 0; i < vecSprite.vecSprite.size(); ++i) {
         Vec2D a = vecSprite.vecSprite[i].getPosition();
@@ -83,12 +84,12 @@ bool colision(const Vec2D misPos, enemyStruct &vecSprite){
 
 /** @brief allows the mug to fire missiles and check for colision with enemy or window
 *
-*@param[in] window : Window that return if the key is pressed 
-*@param[in] mug : Stock the position of the mug to make the missile appear 
+*@param[in] window : Window that return if the key is pressed
+*@param[in] mug : Stock the position of the mug to make the missile appear
 *@param[in] IPPs : structure of ennemies IPPS
 *@param[in] KPPs : structure of ennemies KPPS
 *@param[in] JPPs : structure of ennemies JPPS
-*@param[in] playerLifeUnsigned : Points of the player
+*@param[in] playerPoint : Points of the player
 *@param[in]firstShootM : if a shoot is ongoing
 *@param[in] isPressed : is used to run the function in the background
 *@param[in] misPos : position of the missile
@@ -96,7 +97,7 @@ bool colision(const Vec2D misPos, enemyStruct &vecSprite){
 *
 */
 bool missile(MinGL &window, Sprite &mug, enemyStruct &IPPs, enemyStruct &KPPs, enemyStruct &JPPs,
-             unsigned &playerLifeUnsigned, bool &firstShootM, bool &isPressed, Vec2D &misPos, vector<unsigned> &vecKey){
+             unsigned &playerPoint, bool &firstShootM, bool &isPressed, Vec2D &misPos, vector<unsigned> &vecKey){
     if (window.isPressed({char(vecKey[8]), false})){
         isPressed = true;
     }
@@ -114,7 +115,7 @@ bool missile(MinGL &window, Sprite &mug, enemyStruct &IPPs, enemyStruct &KPPs, e
             return isPressed = false;
         }
             else if (colision(misPos, IPPs) || colision(misPos, KPPs) || colision(misPos, JPPs)){
-                ++playerLifeUnsigned;
+                ++playerPoint;
                 firstShootM = true;
                 return isPressed = false;
             }
@@ -127,7 +128,7 @@ bool missile(MinGL &window, Sprite &mug, enemyStruct &IPPs, enemyStruct &KPPs, e
 
 /** @brief allows the enemy to fire missiles and check for colision with the mug or window
 *
-*@param[in] mug : Stock the position of the mug 
+*@param[in] mug : Stock the position of the mug
 *@param[in] IPPs : Structure of ennemies IPPS
 *@param[in] firstShootT : If a shoot is ongoing
 *@param[in] torPos : position of the torpedo
@@ -183,7 +184,7 @@ bool torpedo(mugStruct &mug, enemyStruct &IPPs, bool &firstShootT, Vec2D &torPos
 *@returns bool : The UFO is shooting
 *
 */
-bool ovniShoot(mugStruct & mug, enemyStruct & ovni, bool & ovniShootT, Vec2D & posTorOvni {
+bool ovniShoot(mugStruct & mug, enemyStruct & ovni, bool & ovniShootT, Vec2D & posTorOvni) {
     if ((ovniShootT == true) && (ovni.state[0] == true)) {
         Vec2D position = ovni.vecSprite[0].getPosition();
         int ovniX = position.getX();

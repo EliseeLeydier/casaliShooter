@@ -33,6 +33,7 @@ using namespace nsGui;
 using namespace chrono;
 using namespace nsAudio;
 
+
 /** @brief Run the credit
 *
 *@param[in] window : window in which we inject the element and detect key presses
@@ -56,7 +57,6 @@ void credit(MinGL &window, Sprite &backgroundNoScreen, Sprite &creditSprite){
         // Empty the queue of events
         window.getEventManager().clearEvents();
     }
-    //sleep(3);
 }
 
 
@@ -67,8 +67,7 @@ void credit(MinGL &window, Sprite &backgroundNoScreen, Sprite &creditSprite){
 *@returns void
 *
 */
-void selectTheme(MinGL &window, Sprite &image, vector<unsigned> vecKey)
-{
+void selectTheme(MinGL &window, Sprite &image, vector<unsigned> vecKey){
         if (window.isPressed({char(vecKey[2]), false})) {
             Vec2D position = image.getPosition();
             int arrowX = 188;
@@ -93,8 +92,7 @@ void selectTheme(MinGL &window, Sprite &image, vector<unsigned> vecKey)
 *@returns unsigned
 *
 */
-unsigned chooseTheme(MinGL &window, Sprite &image, unsigned &baseTheme, vector<unsigned> vecKey)
-{
+unsigned chooseTheme(MinGL &window, Sprite &image, unsigned &baseTheme, vector<unsigned> vecKey){
 
     if (window.isPressed({char(vecKey[1]), false})) {
         Vec2D position = image.getPosition();
@@ -160,8 +158,7 @@ void menu(MinGL &window, nsGui::Sprite &image, vector<unsigned> vecKey) {
 *@returns unsigned according to the selected menu between 0 and 3
 *
 */
-unsigned entrerMenu(MinGL &window, nsGui::Sprite &image, vector<unsigned> vecKey)
-{
+unsigned enterMenu(MinGL &window, nsGui::Sprite &image, vector<unsigned> vecKey){
     if (window.isPressed({char(vecKey[1]), false})) {
         window.resetKey({char(vecKey[1]), false});
             Vec2D position = image.getPosition();
@@ -184,14 +181,14 @@ unsigned entrerMenu(MinGL &window, nsGui::Sprite &image, vector<unsigned> vecKey
 /** @brief Applies the **selected theme**
 *
 *@param[in] window : window in which we inject the element
-*@param[in] choixpsgom : detect which theme to apply
+*@param[in] choiceObject : detect which theme to apply
 *@param[in] themelight : OM background to inject in the window
 *@param[in] themedark : PSG background to inject in the window
 *@returns void
 *
 */
-void choixLightDark (MinGL &window, unsigned &choixpsgom,Sprite &themelight, Sprite &themedark){
-    if (choixpsgom == 0) {
+void LightOrDark (MinGL &window, unsigned &choiceObject,Sprite &themelight, Sprite &themedark){
+    if (choiceObject == 0) {
         window << themelight;
     }
     else {

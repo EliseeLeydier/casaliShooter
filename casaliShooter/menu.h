@@ -24,9 +24,8 @@ void credit(MinGL &, nsGui::Sprite &, nsGui::Sprite &);
 void selectTheme(MinGL &, nsGui::Sprite &, std::vector<unsigned>);
 unsigned chooseTheme(MinGL &, nsGui::Sprite &, unsigned &, std::vector<unsigned>);
 void menu(MinGL &window, nsGui::Sprite &, std::vector<unsigned>);
-unsigned entrerMenu(MinGL &, nsGui::Sprite &, std::vector<unsigned>);
-void dessiner(MinGL &, nsGui::Sprite &);
-void choixLightDark (MinGL &, unsigned &,nsGui::Sprite &, nsGui::Sprite &);
+unsigned enterMenu(MinGL &, nsGui::Sprite &, std::vector<unsigned>);
+void LightOrDark (MinGL &, unsigned &,nsGui::Sprite &, nsGui::Sprite &);
 void showScore(MinGL &);
 bool isBetter(const playersStruct &, const playersStruct &);
 

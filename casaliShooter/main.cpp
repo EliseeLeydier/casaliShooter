@@ -1,12 +1,4 @@
-/**
-* @file main.cpp
-* @brief CasaliShooter game 
-* @author Gonzales, Djerian, Leydier, Volpei, Dugourd
-* @version 1.0
-* @date 11/01/2022
-*/
-
-*/#define FPS_LIMIT 60
+#define FPS_LIMIT 60
 
 #include <iostream>
 #include <fstream>
@@ -58,13 +50,6 @@ Sprite backb("spritesi2/back-button.si2", Vec2D(66, 666));
 Sprite backgroundNoScreen("spritesi2/fondnoscreen.si2", Vec2D(0, 0));
 Sprite creditSprite ("spritesi2/generique.si2", Vec2D(0, -100));
 
-/** @brief Write a nickname
-*
-*@param[in] window : which key is pressed
-*@param[in] nameStr : string of the name player
-*@returns void
-*
-*/
 void keyboardWrite(MinGL &window, string &nameStr){
     for(unsigned i = 97; i < 123; ++i){
         if (window.isPressed({i, false})) {
@@ -76,13 +61,7 @@ void keyboardWrite(MinGL &window, string &nameStr){
         nameStr.pop_back();
     }
 }
-/** @brief Asks for the nickname
-*
-*@param[in] window : used to inject the name into the window
-*@param[in] nameStr : string of the name player
-*@returns void
-*
-*/
+
 void askName(MinGL &window, string &nameStr){
     window << Sprite ("spritesi2/name.si2", Vec2D(100, 250));
     window << Sprite ("spritesi2/spacebar2.si2", Vec2D(100, 500));
@@ -90,7 +69,7 @@ void askName(MinGL &window, string &nameStr){
     window << Text(Vec2D(275, 400), nameStr , KBlue, GlutFont::BITMAP_HELVETICA_18);
 }
 
-void menu(MinGL &window,microseconds frameTime, unsigned &choixobjet, unsigned &choixpsgom, string &nameStr,vector<unsigned> vecKey) {
+void menuChoice(MinGL &window,microseconds frameTime, unsigned &choiceObject, unsigned &psgom, string &nameStr,vector<unsigned> vecKey) {
 
     BgText choosethemode(Vec2D(150, 240), "Choose between light and dark theme with a or z", KWhite, KBlack);
     nsTransition::TransitionEngine transitionEngine;
@@ -102,9 +81,9 @@ void menu(MinGL &window,microseconds frameTime, unsigned &choixobjet, unsigned &
                                                                     seconds::zero(), nsTransition::Transition::MODE_LOOP_SMOOTH));
     transitionEngine.update(frameTime);
 
-    if (choixobjet == 0) { //Casali shooter home screen opening
+    if (choiceObject == 0) { //Casali shooter home screen opening
         window.clearScreen();
-        choixLightDark(window,choixpsgom, background, backgroundpsg);
+        LightOrDark(window,psgom, background, backgroundpsg);
         window <<  titreaccueil;
         window << startb;
         window << scoreb;
@@ -112,56 +91,52 @@ void menu(MinGL &window,microseconds frameTime, unsigned &choixobjet, unsigned &
         window << quitb;
         window << casali;
         menu(window, casali, vecKey);
-        choixobjet = entrerMenu(window, casali, vecKey);
-    }else if (choixobjet == 2){ //Opening of the scoreboard menu
+        choiceObject = enterMenu(window, casali, vecKey);
+    }else if (choiceObject == 2){ //Opening of the scoreboard menu
         window.clearScreen();
-        choixLightDark(window,choixpsgom, background, backgroundpsg);
+        LightOrDark(window,psgom, background, backgroundpsg);
         window << scoreboardbg;
         window << titrescoreboard;
         window << backb;
         if (window.isPressed({char(vecKey[0]), false})) {
-            choixobjet = 0;
+            choiceObject = 0;
         }
         showScore(window);
-    }else if (choixobjet == 3){ //Opening of the option menu
+    }else if (choiceObject == 3){ //Opening of the option menu
         window.clearScreen();
 
-        choixLightDark(window,choixpsgom, background, backgroundpsg);
+        LightOrDark(window,psgom, background, backgroundpsg);
         window << choosethemode;
         window << moon;
         window << sun;
         window << arrow;
         window << backb;
         selectTheme(window, arrow, vecKey);
-        choixpsgom = chooseTheme(window, arrow, choixpsgom, vecKey);
+        psgom = chooseTheme(window, arrow, psgom, vecKey);
         if (window.isPressed({char(vecKey[0]), false})) {
-            choixobjet = 0;
+            choiceObject = 0;
         }
-    }else if(choixobjet == 1){ // Opening of the name window
+    }else if(choiceObject == 1){ // Opening of the name window
         window.clearScreen();
-        choixLightDark(window,choixpsgom, background, backgroundpsg);
+        LightOrDark(window,psgom, background, backgroundpsg);
         askName(window, nameStr);
 
         if (window.isPressed({char(vecKey[1]), false})) {
-            choixobjet = 4;
+            choiceObject = 4;
         }else if (window.isPressed({char(vecKey[0]), false})) {
             window.resetKey({char(vecKey[0]), false});
-            choixobjet = 0;
+            choiceObject = 0;
             nameStr = "";
         }
 
     }
-
-
-    ////////seconds::zero(), nsTransition::Transition::MODE_LOOP_SMOOTH));
-
 }
 
-void gameOpening (MinGL &window, enemyStruct &IPPs, enemyStruct &KPPs, enemyStruct &JPPs, unsigned choixpsgom, mugStruct &mug, string &nameStr, string &playerPointsString, vector<unsigned> vecKey){
+void gameOpening (MinGL &window, enemyStruct &IPPs, enemyStruct &KPPs, enemyStruct &JPPs, unsigned psgom, mugStruct &mug, string &nameStr, string &playerPointsString, vector<unsigned> vecKey){
 
     window.clearScreen();
 
-    choixLightDark(window,choixpsgom, background, backgroundpsg);
+    LightOrDark(window,psgom, background, backgroundpsg);
     window << mug.vecMug[mug.index];
 
     IPPs.update(window);
@@ -187,13 +162,8 @@ void reset (enemyStruct &PPs){
         PPs.state[i] = true;
     }
 }
-
-/** @brief Main application function: The game CasaliShooter
-*
-*@returns 0 if no mistakes
-*
-*/
 int main()
+
 {
     vector<unsigned> vecKey = vecParam("config.yaml");
 
@@ -231,11 +201,11 @@ int main()
     microseconds frameTime = microseconds::zero();
 
     bool startBool = true;
-    unsigned choixobjet=0;
-    unsigned choixpsgom=0;
+    unsigned choiceObject=0;
+    unsigned psgom=0;
 
 
-    unsigned playerLifeUnsigned = 0;
+    unsigned playerPoint = 0;
     bool firstShootM = true;
     bool isPressed = false;
     bool firstShootT = true;
@@ -271,29 +241,29 @@ int main()
         credit(window, backgroundNoScreen, creditSprite);
 
         if(startBool){
-            menu(window, frameTime, choixobjet, choixpsgom, nameStr, vecKey);
+            menuChoice(window, frameTime, choiceObject, psgom, nameStr, vecKey);
         }else if(window.isPressed({char(vecKey[0]), false})){
             startBool = true;
-            choixobjet = 0;
-            menu(window, frameTime, choixobjet, choixpsgom, nameStr, vecKey);
+            choiceObject = 0;
+            menuChoice(window, frameTime, choiceObject, psgom, nameStr, vecKey);
         }
 
 
-        if(choixobjet == 4){ // Opening of the game
+        if(choiceObject == 4){ // Opening of the game
 
-            string playerLifeString = to_string(playerLifeUnsigned);
+            string playerPointString = to_string(playerPoint);
 
-            choixLightDark(window,choixpsgom, background, backgroundpsg);
+            LightOrDark(window,psgom, background, backgroundpsg);
             window << mug.vecMug[mug.index];
 
 
-            gameOpening(window, IPPs, JPPs, KPPs, choixpsgom, mug, nameStr, playerLifeString, vecKey);
+            gameOpening(window, IPPs, JPPs, KPPs, psgom, mug, nameStr, playerPointString, vecKey);
 
 
-            isPressed = missile(window, mug.vecMug[mug.index], IPPs, KPPs, JPPs, playerLifeUnsigned, firstShootM, isPressed, misPos, vecKey);
+            isPressed = missile(window, mug.vecMug[mug.index], IPPs, KPPs, JPPs, playerPoint, firstShootM, isPressed, misPos, vecKey);
             if(isPressed == true) window << nsShape::Rectangle(misPos, misPos + Vec2D(2, 10), KCyan);
 
-            display(window, playerLifeString);
+            display(window, playerPointString);
 
             if (torpedo(mug, IPPs, firstShootT, torPos, backgroundNoScreen, creditSprite, window)) window << nsShape::Rectangle(torPos, torPos + Vec2D(5, 10), KGreen);
 
@@ -331,7 +301,7 @@ int main()
 
                     window.clearScreen();
 
-                    choixLightDark(window,choixpsgom, background, backgroundpsg);
+                    LightOrDark(window,psgom, background, backgroundpsg);
                     window << mug.vecMug[mug.index];
 
                     keyboard(window, mug.vecMug[mug.index], vecKey);
@@ -346,17 +316,17 @@ int main()
                     //OPEN and CLASSROOM movements
 
                     for (size_t i = 0; i <  vecOvni.size(); ++i) {
-                        moveOVNI(vecOvni[i], playerLifeString, nameStr);
+                        moveOVNI(vecOvni[i], playerPointString, nameStr);
                     }
-                    moveVecSprite(classroom, playerLifeString, nameStr);
-                    moveOpen(open, playerLifeString, nameStr);
+                    moveVecSprite(classroom, playerPointString, nameStr);
+                    moveOpen(open, playerPointString, nameStr);
 
-                    isPressed = missile(window, mug.vecMug[mug.index], open, classroom, JPPs, playerLifeUnsigned, firstShootM, isPressed, misPos, vecKey);
+                    isPressed = missile(window, mug.vecMug[mug.index], open, classroom, JPPs, playerPoint, firstShootM, isPressed, misPos, vecKey);
                     if(isPressed == true) window << nsShape::Rectangle(misPos, misPos + Vec2D(2, 10), KCyan);
-                    string playerLifeString = to_string(playerLifeUnsigned);
+                    string playerPointString = to_string(playerPoint);
                     //Points generator
                     window << Text(Vec2D(60, 160), "Pts:", KWhite, GlutFont::BITMAP_9_BY_15);
-                    window << Text(Vec2D(100, 160), playerLifeString, KWhite, GlutFont::BITMAP_9_BY_15);
+                    window << Text(Vec2D(100, 160), playerPointString, KWhite, GlutFont::BITMAP_9_BY_15);
 
                     //Open shooting
                     if (torpedo(mug, open, firstShootT, torPos, backgroundNoScreen, creditSprite, window)) window << nsShape::Rectangle(torPos, torPos + Vec2D(5, 10), KGreen);
