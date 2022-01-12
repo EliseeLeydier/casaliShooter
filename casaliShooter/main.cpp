@@ -1,3 +1,11 @@
+**
+* @file main.cpp
+* @brief CasaliShooter game 
+* @author Gonzales, Djerian, Leydier, Volpei, Dugourd
+* @version 1.0
+* @date 11/01/2022
+*/
+    
 #define FPS_LIMIT 60
 
 #include <iostream>
@@ -50,6 +58,13 @@ Sprite backb("spritesi2/back-button.si2", Vec2D(66, 666));
 Sprite backgroundNoScreen("spritesi2/fondnoscreen.si2", Vec2D(0, 0));
 Sprite creditSprite ("spritesi2/generique.si2", Vec2D(0, -100));
 
+/** @brief Write a nickname
+*
+*@param[in] window : which key is pressed
+*@param[in] nameStr : string of the name player
+*@returns void
+*
+*/
 void keyboardWrite(MinGL &window, string &nameStr){
     for(unsigned i = 97; i < 123; ++i){
         if (window.isPressed({i, false})) {
@@ -62,6 +77,12 @@ void keyboardWrite(MinGL &window, string &nameStr){
     }
 }
 
+/** @brief Asks for the nickname
+*
+*@param[in] window : used to inject the name into the window
+*@param[in] nameStr : string of the name player
+*@returns void
+*
 void askName(MinGL &window, string &nameStr){
     window << Sprite ("spritesi2/name.si2", Vec2D(100, 250));
     window << Sprite ("spritesi2/spacebar2.si2", Vec2D(100, 500));
@@ -69,7 +90,18 @@ void askName(MinGL &window, string &nameStr){
     window << Text(Vec2D(275, 400), nameStr , KBlue, GlutFont::BITMAP_HELVETICA_18);
 }
 
-void menuChoice(MinGL &window,microseconds frameTime, unsigned &choiceObject, unsigned &psgom, string &nameStr,vector<unsigned> vecKey) {
+/** @brief Choice of the menu
+*
+*@param[in] window : window is used to display all elements
+*@param[in] frameTime : Frame Time
+*param[in] choiceObject : selected menu
+*param[in] psgom : Light or Dark Background
+*param[in] nameStr : name of the player
+*param[in] vecKey : configurable keys
+*@returns void
+*
+*/
+void menuChoice(MinGL &window,microseconds &frameTime, unsigned &choiceObject, unsigned &psgom, string &nameStr,vector<unsigned> vecKey) {
 
     BgText choosethemode(Vec2D(150, 240), "Choose between light and dark theme with a or z", KWhite, KBlack);
     nsTransition::TransitionEngine transitionEngine;
@@ -132,6 +164,20 @@ void menuChoice(MinGL &window,microseconds frameTime, unsigned &choiceObject, un
     }
 }
 
+/** @brief The opening of the game
+*
+*@param[in] window : Window is used to display all elements
+*@param[in] IPPS : vector of ennemies IPPS
+*@param[in] JPPS : vector of ennemies JPPS
+*@param[in] KPPS : vector of ennemies KPPS
+*@param[in] psgom : Light or Dark Background
+*@param[in] mug : Sprite of the mug
+*@param[in] nameStr : string of the player name 
+*@param[in] playerPointsString : Points of the players
+*@param[in] vecKey : configurable keys
+*@returns void
+*
+*/
 void gameOpening (MinGL &window, enemyStruct &IPPs, enemyStruct &KPPs, enemyStruct &JPPs, unsigned psgom, mugStruct &mug, string &nameStr, string &playerPointsString, vector<unsigned> vecKey){
 
     window.clearScreen();
@@ -150,6 +196,14 @@ void gameOpening (MinGL &window, enemyStruct &IPPs, enemyStruct &KPPs, enemyStru
     moveVecSprite(JPPs, playerPointsString, nameStr);
 }
 
+/** @brief Points during the game
+*
+*@param[in] window : Window is used to display points
+*@param[in] playerPointsString : Points of the players
+
+*@returns void
+*
+*/
 void display(MinGL &window, string &playerPointsString){
     //Points generator
     window << Text(Vec2D(60, 160), "Pts:", KWhite, GlutFont::BITMAP_9_BY_15);
@@ -157,11 +211,24 @@ void display(MinGL &window, string &playerPointsString){
 
 }
 
+/** @brief Make ennemies reappear
+*
+*@param[in] PPs : vector of ennemies 
+*
+*@returns void
+*
+*/
 void reset (enemyStruct &PPs){
     for (unsigned i = 0; i < PPs.state.size(); ++i) {
         PPs.state[i] = true;
     }
 }
+
+/**@brief Main application function: The game CasaliShooter
+*
+*@returns 0 if no mistakes
+*
+*/
 int main()
 
 {
