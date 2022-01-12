@@ -30,9 +30,9 @@ using namespace nsAudio;
 
 /** @brief Generate in the window IPPS,JPPS,KPPS
 *
-*@param[in] IPPs :
-*@param[in] posY :
-*@param[in] pathSprite :
+*@param[in] IPPs : structure of ennemies IPPS to place into a vector
+*@param[in] posY : position on the screen of each ennemies
+*@param[in] pathSprite : path of images .si2
 *@returns void
 *
 */
@@ -182,7 +182,7 @@ void generateOVNI(enemyStruct & ovni, const string pathSprite) {
 
 /** @brief Generate in the window the mug
 *
-*@param[in] mug :
+*@param[in] mug : structure of the mug
 *@returns void
 *
 */
