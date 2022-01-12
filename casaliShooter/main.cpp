@@ -1,4 +1,12 @@
-#define FPS_LIMIT 60
+/**
+* @file main.cpp
+* @brief CasaliShooter game 
+* @author Gonzales, Djerian, Leydier, Volpei, Dugourd
+* @version 1.0
+* @date 11/01/2022
+*/
+
+*/#define FPS_LIMIT 60
 
 #include <iostream>
 #include <fstream>
@@ -50,6 +58,13 @@ Sprite backb("spritesi2/back-button.si2", Vec2D(66, 666));
 Sprite backgroundNoScreen("spritesi2/fondnoscreen.si2", Vec2D(0, 0));
 Sprite creditSprite ("spritesi2/generique.si2", Vec2D(0, -100));
 
+/** @brief Write a nickname
+*
+*@param[in] window : which key is pressed
+*@param[in] nameStr : string of the name player
+*@returns void
+*
+*/
 void keyboardWrite(MinGL &window, string &nameStr){
     for(unsigned i = 97; i < 123; ++i){
         if (window.isPressed({i, false})) {
@@ -61,7 +76,13 @@ void keyboardWrite(MinGL &window, string &nameStr){
         nameStr.pop_back();
     }
 }
-
+/** @brief Asks for the nickname
+*
+*@param[in] window : used to inject the name into the window
+*@param[in] nameStr : string of the name player
+*@returns void
+*
+*/
 void askName(MinGL &window, string &nameStr){
     window << Sprite ("spritesi2/name.si2", Vec2D(100, 250));
     window << Sprite ("spritesi2/spacebar2.si2", Vec2D(100, 500));
@@ -166,8 +187,13 @@ void reset (enemyStruct &PPs){
         PPs.state[i] = true;
     }
 }
-int main()
 
+/** @brief Main application function: The game CasaliShooter
+*
+*@returns 0 if no mistakes
+*
+*/
+int main()
 {
     vector<unsigned> vecKey = vecParam("config.yaml");
 
