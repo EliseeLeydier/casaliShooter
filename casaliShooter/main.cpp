@@ -265,7 +265,7 @@ int main()
 
             display(window, playerPointString);
 
-            if (torpedo(mug, IPPs, firstShootT, torPos, backgroundNoScreen, creditSprite, window)) window << nsShape::Rectangle(torPos, torPos + Vec2D(5, 10), KGreen);
+            if (torpedo(mug, IPPs, firstShootT, torPos)) window << nsShape::Rectangle(torPos, torPos + Vec2D(5, 10), KGreen);
 
 
             //Verify if enemies are still alive
@@ -329,14 +329,14 @@ int main()
                     window << Text(Vec2D(100, 160), playerPointString, KWhite, GlutFont::BITMAP_9_BY_15);
 
                     //Open shooting
-                    if (torpedo(mug, open, firstShootT, torPos, backgroundNoScreen, creditSprite, window)) window << nsShape::Rectangle(torPos, torPos + Vec2D(5, 10), KGreen);
+                    if (torpedo(mug, open, firstShootT, torPos)) window << nsShape::Rectangle(torPos, torPos + Vec2D(5, 10), KGreen);
 
                     //Ovnis shooting
-                    if (ovniShoot(mug, vecOvni[0], ovniTorOne, vecOvniTorpedo[0], backgroundNoScreen, creditSprite, window)) window << nsShape::Rectangle(vecOvniTorpedo[0], vecOvniTorpedo[0] + Vec2D(5, 10), KGreen);
-                    if (ovniShoot(mug, vecOvni[1], ovniTorTwo, vecOvniTorpedo[1], backgroundNoScreen, creditSprite, window)) window << nsShape::Rectangle(vecOvniTorpedo[1], vecOvniTorpedo[1] + Vec2D(5, 10), KGreen);
-                    if (ovniShoot(mug, vecOvni[2], ovniTorThree, vecOvniTorpedo[2], backgroundNoScreen, creditSprite, window)) window << nsShape::Rectangle(vecOvniTorpedo[2], vecOvniTorpedo[2] + Vec2D(5, 10), KGreen);
-                    if (ovniShoot(mug, vecOvni[3], ovniTorFour, vecOvniTorpedo[3], backgroundNoScreen, creditSprite, window)) window << nsShape::Rectangle(vecOvniTorpedo[3], vecOvniTorpedo[3] + Vec2D(5, 10), KGreen);
-                    if (ovniShoot(mug, vecOvni[4], ovniTorFive, vecOvniTorpedo[4], backgroundNoScreen, creditSprite, window)) window << nsShape::Rectangle(vecOvniTorpedo[4], vecOvniTorpedo[4] + Vec2D(5, 10), KGreen);
+                    if (ovniShoot(mug, vecOvni[0], ovniTorOne, vecOvniTorpedo[0])) window << nsShape::Rectangle(vecOvniTorpedo[0], vecOvniTorpedo[0] + Vec2D(5, 10), KGreen);
+                    if (ovniShoot(mug, vecOvni[1], ovniTorTwo, vecOvniTorpedo[1])) window << nsShape::Rectangle(vecOvniTorpedo[1], vecOvniTorpedo[1] + Vec2D(5, 10), KGreen);
+                    if (ovniShoot(mug, vecOvni[2], ovniTorThree, vecOvniTorpedo[2])) window << nsShape::Rectangle(vecOvniTorpedo[2], vecOvniTorpedo[2] + Vec2D(5, 10), KGreen);
+                    if (ovniShoot(mug, vecOvni[3], ovniTorFour, vecOvniTorpedo[3] )) window << nsShape::Rectangle(vecOvniTorpedo[3], vecOvniTorpedo[3] + Vec2D(5, 10), KGreen);
+                    if (ovniShoot(mug, vecOvni[4], ovniTorFive, vecOvniTorpedo[4])) window << nsShape::Rectangle(vecOvniTorpedo[4], vecOvniTorpedo[4] + Vec2D(5, 10), KGreen);
 
                     // We finish the current frame
                     window.finishFrame();
