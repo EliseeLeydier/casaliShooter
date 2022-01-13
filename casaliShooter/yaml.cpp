@@ -1,6 +1,6 @@
 /**
 * @file yaml.cpp
-* @brief YAML : Allows to parse the configurable file 
+* @brief YAML : Allows to parse the configurable file
 * @author Gonzales, Djerian, Leydier, Volpei, Dugourd
 * @version 1.0
 * @date 11/01/2022

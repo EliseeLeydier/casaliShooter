@@ -12,7 +12,7 @@ SOURCES += \
         move.cpp \
         yaml.cpp
 
-include(/Users/elisee/OneDrive - Aix-Marseille Université/SAE/3/R.101/CS/CasaliShooter-main/MinGL2/mingl.pri)
+include(MinGL2/mingl.pri)
 
 HEADERS += \
     bgtext.h \
